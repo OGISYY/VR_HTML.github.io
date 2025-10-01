@@ -33,6 +33,21 @@ AFRAME.registerComponent('show-html', {
 
 
 // Ejecutar cuando la escena está lista
-document.querySelector('#scene').addEventListener('renderstart', () => {
-  adjustCanvasHeight();
-});
+	document.querySelector('#scene').addEventListener('renderstart', () => {
+	adjustCanvasHeight();
+	});
+
+	document.querySelector('#startButton').addEventListener('click', () => {
+	const sceneEl = document.querySelector('#scene');
+	
+	// Ocultar el botón
+	document.querySelector('#startButton').style.display = 'none';
+	
+	// Mostrar la escena y comenzar MindAR
+	sceneEl.style.display = 'block';
+	sceneEl.components['mindar-image'].start();
+
+	// Ajustar canvas dinámicamente
+	adjustCanvasHeight();
+	});
+
