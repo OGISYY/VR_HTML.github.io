@@ -50,17 +50,21 @@ sceneEl.addEventListener("mindar-image-targetLost", (event) => {
 // ---------------------------
 function resizeCanvas() {
     const canvas = document.querySelector("canvas");
-    if (!canvas) {
-        arLog("Canvas no encontrado todavía.");
-        return;
-    }
+    if (!canvas) return;
+
+    // Forzar tamaño del canvas
     canvas.style.width = window.innerWidth + "px";
     canvas.style.height = window.innerHeight + "px";
-    if (sceneEl.renderer) {
-        sceneEl.renderer.setSize(window.innerWidth, window.innerHeight);
-        arLog(`Canvas redimensionado a ${window.innerWidth}x${window.innerHeight}`);
+
+    // Ajuste del renderer y cámara de A-Frame
+    if (sceneEl.renderer && sceneEl.camera) {
+        sceneEl.renderer.setSize(window.innerWidth, window.innerHeight, false);
+        sceneEl.camera.aspect = window.innerWidth / window.innerHeight;
+        sceneEl.camera.updateProjectionMatrix();
     }
 }
+
+
 
 // Ajustar automáticamente al cambiar tamaño de ventana
 window.addEventListener("resize", resizeCanvas);
