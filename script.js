@@ -48,28 +48,13 @@ sceneEl.addEventListener("mindar-image-targetLost", (event) => {
 // ---------------------------
 // Ajuste del canvas
 // ---------------------------
-function resizeCanvas() {
-    const canvas = document.querySelector("canvas");
-    if (!canvas) return;
-
-    // Forzar tamaño del canvas
-    canvas.style.width = window.innerWidth + "px";
-    canvas.style.height = window.innerHeight + "px";
-
-    // Ajuste del renderer y cámara de A-Frame
-    if (sceneEl.renderer && sceneEl.camera) {
-        sceneEl.renderer.setSize(window.innerWidth, window.innerHeight, false);
-        sceneEl.camera.aspect = window.innerWidth / window.innerHeight;
-        sceneEl.camera.updateProjectionMatrix();
-    }
-}
 function resizeCanvasMobile() {
-    const canvas = document.querySelector("canvas");
+   const canvas = document.querySelector("canvas");
     if (!canvas) return;
 
-    // Altura real de la ventana, excluyendo barra navegador
+    // En móvil usar visualViewport si existe
     const width = window.innerWidth;
-    const height = window.innerHeight;
+    const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
 
     canvas.style.width = width + "px";
     canvas.style.height = height + "px";
@@ -79,12 +64,19 @@ function resizeCanvasMobile() {
         sceneEl.camera.aspect = width / height;
         sceneEl.camera.updateProjectionMatrix();
     }
+
+    arLog(`Canvas ajustado a ${width}x${height}`);
 }
 
 
 
 
 // Ajustar automáticamente al cambiar tamaño de ventana
+sceneEl.addEventListener("loaded", resizeCanvasMobile);
 window.addEventListener("resize", resizeCanvasMobile);
 window.addEventListener("orientationchange", resizeCanvasMobile)
-sceneEl.addEventListener("loaded", resizeCanvasMobile);
+
+if (window.visualViewport){
+	window.visualViewport.addEventListener("resize", resizeCanvasMobile)
+}
+
