@@ -45,6 +45,18 @@ sceneEl.addEventListener("mindar-image-targetLost", (event) => {
     arLog(`Target perdido: ${event.detail.targetIndex}`);
 });
 
+const marker0 = document.querySelector("#marker0");
+
+marker0.addEventListener("targetFound", () => {
+  fichaHTML.style.display = "block";
+  arLog("Target 0 detectado correctamente");
+});
+
+marker0.addEventListener("targetLost", () => {
+  fichaHTML.style.display = "none";
+  arLog("Target 0 perdido");
+});
+
 // ---------------------------
 // Ajuste del canvas
 // ---------------------------
