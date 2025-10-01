@@ -1,47 +1,21 @@
-// Ocultar overlay al inicio
-const infoCard = document.querySelector('#info-card');
-infoCard.style.display = 'none';
-
-// Componente para mostrar/ocultar el div HTML
-AFRAME.registerComponent('show-html', {
-  init: function () {
-    this.el.addEventListener('targetFound', () => {
-      infoCard.style.display = 'block';
-    });
-    this.el.addEventListener('targetLost', () => {
-      infoCard.style.display = 'none';
-    });
-  }
-});
-
-// Ajustar escena y canvas al tamaño real del viewport
-function resizeScene() {
+// Ajuste dinámico del canvas al viewport real
+function adjustCanvasHeight() {
   const scene = document.querySelector('#scene');
   if (!scene) return;
 
   const canvas = scene.querySelector('canvas');
   if (canvas) {
+    const h = window.innerHeight;
+    canvas.style.height = `${h}px`;
     canvas.style.width = '100vw';
-    canvas.style.height = `${window.innerHeight}px`;
+    scene.style.height = `${h}px`;
+    scene.style.width = '100vw';
   }
 
-  scene.style.width = '100vw';
-  scene.style.height = `${window.innerHeight}px`;
+  requestAnimationFrame(adjustCanvasHeight);
 }
 
-// Ejecutar resize cuando el canvas esté listo
+// Ejecutar cuando la escena está lista
 document.querySelector('#scene').addEventListener('renderstart', () => {
-  resizeScene();
-});
-
-// Ajuste al cambiar tamaño u orientación
-window.addEventListener('resize', resizeScene);
-window.addEventListener('orientationchange', resizeScene);
-
-// Botón para iniciar AR
-document.querySelector('#startButton').addEventListener('click', () => {
-  const sceneEl = document.querySelector('#scene');
-  document.querySelector('#startButton').style.display = 'none';
-  sceneEl.style.display = 'block';
-  sceneEl.components['mindar-image'].start();
+  adjustCanvasHeight();
 });
