@@ -11,28 +11,27 @@
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.0/dist/mindar-image-aframe.prod.js"></script>
 </head>
 <body>
-    <!-- Contenedor de AR -->
+    <!-- Contenedor AR -->
     <a-scene mindar-image="imageTargetSrc: ./targets.mind;"
      embedded 
      color-space="sRGB" 
      renderer="antialias: true; colorManagement: true;">
         <!-- Cámara de AR -->
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-        
-            <!-- Consola visual -->
-        <a-entity id="debug-console">
-        <a-plane position="0 -1 -2" rotation="0 0 0" width="2" height="1" color="#222" material="opacity: 0.8"></a-plane>
-        <a-text id="console-text" value="Consola AR:\n" color="#0f0" align="left" position="-0.95 0.4 0.01" wrap-count="40"></a-text>
-        </a-entity>
-
-        <!-- Aquí se colocará el contenido AR -->
-        <a-entity mindar-image-target="targetIndex: 0">
-            <a-plane position="0 0 0" rotation="0 0 0" width="1" height="1.5" color="#FFF" material="opacity: 0.8">
-                <!-- Contenido de la ficha técnica -->
-                <a-text value="Ficha Técnica\nNombre: Producto\nDescripción: ..." color="#000" align="center" position="0 0 0.01"></a-text>
-            </a-plane>
-        </a-entity>
     </a-scene>
+
+    <!-- Ficha técnica HTML real -->
+    <div id="ficha-html" class="ficha" style="display: none;">
+        <h2>Ficha Tecnica</h2>
+        <p><strong>Nombre:</strong> Objeto</p>
+        <p><strong>Descripción:</strong> Lorem ipsum dolor sit amet</p>
+    </div>
+
+    <!-- Consola visual opcional -->
+    <div id="console-log" class="ficha" style="display: none; top: auto; bottom: 5%; right: 5%; width: 300px;">
+        <h3>Consola AR</h3>
+        <div id="console-text" style="font-size: 12px; max-height: 200px; overflow-y: auto;"></div>
+    </div>
 
     <!-- Vincular JS -->
     <script src="script.js"></script>
