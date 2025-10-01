@@ -41,7 +41,7 @@ marker0.addEventListener("targetFound", (event) => {
 	fichaHTML.style.display="block";
 	arLog("Target Encontrado")
 });
-marker0.addEventListener("targetLost", (event) => {
+marker0.addEventListener("targetLost", (event) =>{
 	fichaHTML.style.display="none";
 	arLog("Target Perdido")
 })
@@ -70,9 +70,6 @@ function resizeCanvasMobile() {
     arLog(`Canvas ajustado a ${width}x${height}`);
 }
 
-
-
-
 // Ajustar automáticamente al cambiar tamaño de ventana
 sceneEl.addEventListener("loaded", resizeCanvasMobile);
 window.addEventListener("resize", resizeCanvasMobile);
@@ -81,4 +78,35 @@ window.addEventListener("orientationchange", resizeCanvasMobile)
 if (window.visualViewport){
 	window.visualViewport.addEventListener("resize", resizeCanvasMobile)
 }
+
+
+
+
+//----------------------------
+// Navegar por paginas
+//----------------------------
+
+function sailPages(page){
+	window.location.href = page
+}
+
+// ---------------------------
+// Selector de idioma
+// ---------------------------
+
+//! set del idioma
+function setLanguage(lang){
+	localStorage.setItem('Lang', lang)
+	window.location.href = "2_help.html"
+}
+
+//! get del idioma
+function getLanguage(){
+	const lang = localStorage.getItem('Lang')
+	if (!lang) return 'ca'; //? Defauld value
+	return lang
+}
+
+const LANG = getLanguage();
+arLog('Idioma cambiado a ' + LANG);
 
