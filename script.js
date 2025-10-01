@@ -18,20 +18,18 @@ function adjustCanvasHeight() {
 AFRAME.registerComponent('show-html', {
   init: function () {
     const infoCard = document.querySelector('#info-card');
-    // Ocultar al inicio
-    infoCard.style.visibility = 'hidden';
+    infoCard.style.opacity = 0;
 
-    // Mostrar cuando se detecta el target
     this.el.addEventListener('targetFound', () => {
-      infoCard.style.visibility = 'visible';
+      infoCard.style.opacity = 1;
     });
 
-    // Ocultar cuando se pierde el target
     this.el.addEventListener('targetLost', () => {
-      infoCard.style.visibility = 'hidden';
+      infoCard.style.opacity = 0;
     });
   }
 });
+
 
 
 // Ejecutar cuando la escena está lista

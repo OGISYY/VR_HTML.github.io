@@ -34,12 +34,13 @@
     <a-entity mindar-image-target="targetIndex: 0">
     <!-- Plano donde se renderiza el HTML -->
     <a-plane 
-        position="0 0 0" 
-        rotation="-90 0 0" 
+        position="0 0 0.5"  <!-- un poco delante de la cámara -->
+        rotation="0 0 0"     <!-- sin rotación -->
         width="1.2" 
-        height="0.7"
+        height="0.8"
         material="shader: html; target: #info-card;">
     </a-plane>
+
 
     <!-- Componente para controlar visibilidad -->
     <a-entity show-html></a-entity>
