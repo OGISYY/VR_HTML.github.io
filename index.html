@@ -6,6 +6,7 @@
     <title>AR-Test</title>
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>  <!-- Script para realidad aumentada--> 
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://unpkg.com/aframe-html-shader@0.3.0/dist/aframe-html-shader.min.js"></script>
     <style>
         .card{
             width: 300px;
@@ -22,14 +23,14 @@
     <div id = "html-card" class="card" style="display: none;">
         <h2> Producto X</h2>
         <p> Descripcion breve del producto AR</p>
-        <button onclick="close"('Info')> Ver más</button>
+        <button onclick="alert('Info')"> Ver más</button>
     </div>
 
     <a-scene
         mindar-image="imageTargetSrc: ./targets.mind"
         embedded
         color-space="sRGB"
-        rendere="colorManagment: true, physicallyCorrectLights"
+        renderer="colorManagement: true, physicallyCorrectLights"
         vr-mode-ui="enabled: true"
         device-orientation-permission-ui="enabled: false">
     
