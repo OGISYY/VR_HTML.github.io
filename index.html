@@ -9,68 +9,18 @@
   <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
-  <style>
-    html, body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-    }
-
-    a-scene {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh; /* valor inicial, luego JS ajusta a innerHeight */
-        background: transparent;
-    }
-
-
-    /* Overlay HTML */
-    #info-card {
-      display: none;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      width: 280px;
-      z-index: 10;
-    }
-
-    /* Botón para iniciar AR */
-    #startButton {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 15px 30px;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      background: #007bff;
-      color: white;
-      cursor: pointer;
-      z-index: 9999;
-    }
-  </style>
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Botón para iniciar AR -->
   <button id="startButton">Iniciar AR</button>
 
-  <!-- Tarjeta HTML -->
   <div id="info-card">
     <h2>Producto X</h2>
     <p>Descripción breve del producto</p>
   </div>
 
-  <!-- Escena A-Frame -->
   <a-scene
     id="scene"
     mindar-image="imageTargetSrc: targets.mind"
@@ -86,50 +36,7 @@
     <a-entity mindar-image-target="targetIndex: 0" show-html></a-entity>
   </a-scene>
 
-  <script>
-    // Componente para mostrar/ocultar el div HTML
-    AFRAME.registerComponent('show-html', {
-      init: function () {
-        const infoCard = document.querySelector('#info-card');
-        this.el.addEventListener('targetFound', () => {
-          infoCard.style.display = 'block';
-        });
-        this.el.addEventListener('targetLost', () => {
-          infoCard.style.display = 'none';
-        });
-      }
-    });
-
-    // Función para ajustar escena y canvas al tamaño real del viewport
-    function resizeScene() {
-    const scene = document.querySelector('#scene');
-    if (!scene) return;
-
-    // Ajusta la altura del canvas al viewport real
-    const canvas = scene.querySelector('canvas');
-    if (canvas) {
-        canvas.style.width = '100vw';
-        canvas.style.height = `${window.innerHeight}px`;
-    }
-
-    // Ajusta la altura de la escena también
-    scene.style.width = '100vw';
-    scene.style.height = `${window.innerHeight}px`;
-    }
-
-    // Ajuste inicial y cada vez que cambie el tamaño
-    window.addEventListener('load', resizeScene);
-    window.addEventListener('resize', resizeScene);
-    window.addEventListener('orientationchange', resizeScene);
-
-
-    // Botón para iniciar AR (necesario en móviles)
-    document.querySelector('#startButton').addEventListener('click', () => {
-      const sceneEl = document.querySelector('#scene');
-      document.querySelector('#startButton').style.display = 'none';
-      sceneEl.style.display = 'block';
-      sceneEl.components['mindar-image'].start();
-    });
-  </script>
+  <!-- JS externo -->
+  <script src="script.js"></script>
 </body>
 </html>
