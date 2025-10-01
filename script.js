@@ -15,6 +15,25 @@ function adjustCanvasHeight() {
   requestAnimationFrame(adjustCanvasHeight);
 }
 
+AFRAME.registerComponent('show-html', {
+  init: function () {
+    const infoCard = document.querySelector('#info-card');
+    // Ocultar al inicio
+    infoCard.style.visibility = 'hidden';
+
+    // Mostrar cuando se detecta el target
+    this.el.addEventListener('targetFound', () => {
+      infoCard.style.visibility = 'visible';
+    });
+
+    // Ocultar cuando se pierde el target
+    this.el.addEventListener('targetLost', () => {
+      infoCard.style.visibility = 'hidden';
+    });
+  }
+});
+
+
 // Ejecutar cuando la escena está lista
 document.querySelector('#scene').addEventListener('renderstart', () => {
   adjustCanvasHeight();
