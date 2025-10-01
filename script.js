@@ -63,9 +63,28 @@ function resizeCanvas() {
         sceneEl.camera.updateProjectionMatrix();
     }
 }
+function resizeCanvasMobile() {
+    const canvas = document.querySelector("canvas");
+    if (!canvas) return;
+
+    // Altura real de la ventana, excluyendo barra navegador
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    if (sceneEl.renderer && sceneEl.camera) {
+        sceneEl.renderer.setSize(width, height, false);
+        sceneEl.camera.aspect = width / height;
+        sceneEl.camera.updateProjectionMatrix();
+    }
+}
+
 
 
 
 // Ajustar automáticamente al cambiar tamaño de ventana
-window.addEventListener("resize", resizeCanvas);
-sceneEl.addEventListener("loaded", resizeCanvas);
+window.addEventListener("resize", resizeCanvasMobile);
+window.addEventListener("orientationchange", resizeCanvasMobile)
+sceneEl.addEventListener("loaded", resizeCanvasMobile);
