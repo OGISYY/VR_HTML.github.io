@@ -1,125 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR-Test</title>
-
-  <!-- A-Frame y MindAR -->
-  <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-
-  <style>
-    html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-
-    a-scene {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: transparent;
-    }
-
-    /* Overlay HTML */
-    #info-card {
-      display: none;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: white;
-      padding: 15px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      width: 280px;
-      z-index: 10;
-    }
-
-    /* Botón para iniciar AR */
-    #startButton {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 15px 30px;
-      font-size: 18px;
-      border: none;
-      border-radius: 10px;
-      background: #007bff;
-      color: white;
-      cursor: pointer;
-      z-index: 9999;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto AR - Ficha Técnica</title>
+    <!-- Vincular CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- MindAR JS y A-Frame -->
+    <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.0/dist/mindar-image-aframe.prod.js"></script>
 </head>
 <body>
+    <!-- Contenedor de AR -->
+    <a-scene mindar-image="imageTargetSrc: target.mind;" embedded color-space="sRGB" renderer="antialias: true; colorManagement: true;">
+        <!-- Cámara de AR -->
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+        
+            <!-- Consola visual -->
+        <a-entity id="debug-console">
+        <a-plane position="0 -1 -2" rotation="0 0 0" width="2" height="1" color="#222" material="opacity: 0.8"></a-plane>
+        <a-text id="console-text" value="Consola AR:\n" color="#0f0" align="left" position="-0.95 0.4 0.01" wrap-count="40"></a-text>
+        </a-entity>
 
-  <!-- Botón para iniciar AR -->
-  <button id="startButton">Iniciar AR</button>
+        <!-- Aquí se colocará el contenido AR -->
+        <a-entity mindar-image-target="targetIndex: 0">
+            <a-plane position="0 0 0" rotation="0 0 0" width="1" height="1.5" color="#FFF" material="opacity: 0.8">
+                <!-- Contenido de la ficha técnica -->
+                <a-text value="Ficha Técnica\nNombre: Producto\nDescripción: ..." color="#000" align="center" position="0 0 0.01"></a-text>
+            </a-plane>
+        </a-entity>
+    </a-scene>
 
-  <!-- Tarjeta HTML -->
-  <div id="info-card">
-    <h2>Producto X</h2>
-    <p>Descripción breve del producto</p>
-  </div>
-
-  <!-- Escena A-Frame -->
-  <a-scene id="scene"
-           mindar-image="imageTargetSrc: targets.mind"
-           embedded
-           color-space="sRGB"
-           renderer="colorManagement: true, physicallyCorrectLights"
-           vr-mode-ui="enabled: false"
-           device-orientation-permission-ui="enabled: false"
-           style="display:none">
-
-    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-    <a-entity mindar-image-target="targetIndex: 0" show-html></a-entity>
-  </a-scene>
-
-  <script>
-    // Componente para mostrar/ocultar el div HTML
-    AFRAME.registerComponent('show-html', {
-      init: function () {
-        const infoCard = document.querySelector('#info-card');
-        this.el.addEventListener('targetFound', () => { infoCard.style.display = 'block'; });
-        this.el.addEventListener('targetLost', () => { infoCard.style.display = 'none'; });
-      }
-    });
-
-    // Función para ajustar escena y canvas al tamaño real del viewport
-    function resizeScene() {
-      const scene = document.querySelector('#scene');
-      if (!scene) return;
-
-      const canvas = scene.querySelector('canvas');
-      if (canvas) {
-        canvas.style.width = '100vw';
-        canvas.style.height = `${window.innerHeight}px`;
-      }
-
-      scene.style.width = '100vw';
-      scene.style.height = `${window.innerHeight}px`;
-    }
-
-    window.addEventListener('load', resizeScene);
-    window.addEventListener('resize', resizeScene);
-    window.addEventListener('orientationchange', resizeScene);
-
-    // Botón para iniciar AR
-    document.querySelector('#startButton').addEventListener('click', () => {
-      const sceneEl = document.querySelector('#scene');
-      document.querySelector('#startButton').style.display = 'none';
-      sceneEl.style.display = 'block';
-      sceneEl.components['mindar-image'].start();
-    });
-  </script>
+    <!-- Vincular JS -->
+    <script src="script.js"></script>
 </body>
 </html>
