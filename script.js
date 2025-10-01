@@ -35,27 +35,17 @@ arLog("Consola AR lista. Escuchando errores...");
 // ---------------------------
 // Eventos MindAR
 // ---------------------------
-sceneEl.addEventListener("mindar-image-targetFound", (event) => {
-    fichaHTML.style.display = "block";
-    arLog(`Target encontrado: ${event.detail.targetIndex}`);
-});
-
-sceneEl.addEventListener("mindar-image-targetLost", (event) => {
-    fichaHTML.style.display = "none";
-    arLog(`Target perdido: ${event.detail.targetIndex}`);
-});
-
 const marker0 = document.querySelector("#marker0");
 
-marker0.addEventListener("targetFound", () => {
-  fichaHTML.style.display = "block";
-  arLog("Target 0 detectado correctamente");
+marker0.addEventListener("targetFound", (event) => {
+	fichaHTML.style.display="block";
+	arLog("Target Encontrado")
 });
+marker0.addEventListener("targetLost", (event) => {
+	fichaHTML.style.display="none";
+	arLog("Target Perdido")
+})
 
-marker0.addEventListener("targetLost", () => {
-  fichaHTML.style.display = "none";
-  arLog("Target 0 perdido");
-});
 
 // ---------------------------
 // Ajuste del canvas
