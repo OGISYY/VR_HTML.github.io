@@ -11,22 +11,22 @@
 
   <style>
     html, body {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
     }
 
-    /* Escena ocupa toda la pantalla */
     a-scene {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: transparent;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* valor inicial, luego JS ajusta a innerHeight */
+        background: transparent;
     }
+
 
     /* Overlay HTML */
     #info-card {
@@ -102,19 +102,26 @@
 
     // Función para ajustar escena y canvas al tamaño real del viewport
     function resizeScene() {
-      const scene = document.querySelector('#scene');
-      if(scene) {
-        scene.style.height = `${window.innerHeight}px`;
-        const canvas = scene.querySelector('canvas');
-        if(canvas){
-          canvas.style.width = '100vw';
-          canvas.style.height = `${window.innerHeight}px`;
-        }
-      }
+    const scene = document.querySelector('#scene');
+    if (!scene) return;
+
+    // Ajusta la altura del canvas al viewport real
+    const canvas = scene.querySelector('canvas');
+    if (canvas) {
+        canvas.style.width = '100vw';
+        canvas.style.height = `${window.innerHeight}px`;
     }
 
+    // Ajusta la altura de la escena también
+    scene.style.width = '100vw';
+    scene.style.height = `${window.innerHeight}px`;
+    }
+
+    // Ajuste inicial y cada vez que cambie el tamaño
     window.addEventListener('load', resizeScene);
     window.addEventListener('resize', resizeScene);
+    window.addEventListener('orientationchange', resizeScene);
+
 
     // Botón para iniciar AR (necesario en móviles)
     document.querySelector('#startButton').addEventListener('click', () => {
