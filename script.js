@@ -30,12 +30,11 @@ function resizeScene() {
   scene.style.height = `${window.innerHeight}px`;
 }
 
-// Ajuste inicial y cada vez que cambie el tamaño
 window.addEventListener('load', resizeScene);
 window.addEventListener('resize', resizeScene);
 window.addEventListener('orientationchange', resizeScene);
 
-// Esperar a que la escena se cargue completamente antes de enganchar el botón
+// Inicializar botón solo cuando la escena haya cargado
 const sceneEl = document.querySelector('#scene');
 sceneEl.addEventListener('loaded', () => {
   const startBtn = document.querySelector('#startButton');
@@ -48,8 +47,13 @@ sceneEl.addEventListener('loaded', () => {
     sceneEl.style.visibility = 'visible';
     sceneEl.style.opacity = '1';
 
-    // Iniciar MindAR
-    await sceneEl.components['mindar-image'].start();
+    // Iniciar MindAR usando el sistema (más confiable en móviles)
+    const mindarSystem = sceneEl.systems['mindar-image'];
+    if (mindarSystem) {
+      await mindarSystem.start();
+    } else {
+      console.error('MindAR system not found!');
+    }
 
     // Ajustar canvas
     resizeScene();
