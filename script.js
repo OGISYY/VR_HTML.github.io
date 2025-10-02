@@ -125,14 +125,16 @@ document.querySelectorAll("[id^=marker]").forEach(marker => {
 
     if (!markerContent[index]) return;
 
-    marker.addEventListener("targetFound", () => {
-        if (fichaHTML) {
-            fichaHTML.style.display = "block";
-            fichaTitulo.textContent = getFicha(LANG, markerContent[index].titulo);
-            fichaDescripcion.textContent = getFicha(LANG, markerContent[index].descripcion);
-        }
-        arLog(`Marker ${index} encontrado`);
-    });
+marker.addEventListener("targetFound", () => {
+    if (fichaHTML) {
+        fichaHTML.style.display = "block";
+        const ficha = getFicha(index, LANG); // index = marker.dataset.marker
+        fichaTitulo.textContent = ficha.titulo;
+        fichaDescripcion.textContent = ficha.descripcion;
+    }
+    arLog(`Marker ${index} encontrado`);
+});
+
 
     marker.addEventListener("targetLost", () => {
         if (fichaHTML) fichaHTML.style.display = "none";
