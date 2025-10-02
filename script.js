@@ -128,8 +128,8 @@ document.querySelectorAll("[id^=marker]").forEach(marker => {
     marker.addEventListener("targetFound", () => {
         if (fichaHTML) {
             fichaHTML.style.display = "block";
-            fichaTitulo.textContent = getText(LANG, markerContent[index].titulo);
-            fichaDescripcion.textContent = getText(LANG, markerContent[index].descripcion);
+            fichaTitulo.textContent = getFicha(LANG, markerContent[index].titulo);
+            fichaDescripcion.textContent = getFicha(LANG, markerContent[index].descripcion);
         }
         arLog(`Marker ${index} encontrado`);
     });
