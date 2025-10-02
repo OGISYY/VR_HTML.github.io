@@ -42,7 +42,7 @@ const FICHAS = [
 		ca:{titulo:"ESCHERICHIA COLI (BACTERIS)", descripcion:`“Al pot petit hi ha la bona confitura”. I, sinó, que li diguin a Escherichia coli.
 																Descobert l’any 1885 per Theodor Escherich (qui li va donar el nom), aquest bacteri de l’ordre Enterobacterales, originat fa aproximadament 30–40 milions d’anys i habitant del nostre tracte digestiu, ha resultat ser una caixa de sorpreses, especialment pels camps de la microbiologia, la biotecnologia i la biomedicina. La seva enorme plasticitat genètica i metabòlica, sumat a una enorme facilitat per ser cultivat al laboratori, el converteix en un model excel·lent per diferents camps de recerca teòrics i aplicats. De fet, una de les primeres aplicacions pràctiques de la tecnologia de recombinació d’ADN va ser manipular soques d’E. coli per obtenir insulina humana pel tractament de la diabetes.  
 																Però no és or tot el que lluu: tot i que la majoria de soques d’Escherichia coli són innòcues, n’hi ha que poden provocar greus infeccions a través, per exemple, de la contaminació d’aigua de boca i d’aliments... amb restes fecals.`},
-		es:{titulo:"Nombre del ser vivo", descripcion:"Descripcion del ser vivo"}
+		en:{titulo:"Nombre del ser vivo", descripcion:"Descripcion del ser vivo"}
 	},
 	{
 		//? Ficha 3
@@ -50,20 +50,20 @@ const FICHAS = [
 		ca:{titulo:"BACILLUS SUBTILIS (BACTERIS)", descripcion:`El món viscut des del prisma d’un ésser diminut pot ser un lloc molt hostil. Per això, cal tenir sempre un as sota la màniga.
 																Els bacteris del gènere Bacillus (ordre Bacillales) són capaços d’adoptar una forma de resistència inactiva i no reproductiva, anomenada endòspora, que els permet sobreviure en condicions ambientals extremes de temperatura, sequera i radiació durant molts anys (fins i tot dècades!). 
 																Dins les espècies d’aquest gènere, però, n’hi ha una que destaca per sobre de totes: Bacillus subtilis. De la mateixa manera que el bacteri Escherichia coli, el qual s’utilitza en infinitat d’experiments, B. subtilis també presenta un munt de propietats que fan que sigui un organisme model excel·lent: per exemple, és capaç de produir enzims d’ús industrial, agrícola i biomèdic en quantitats molt superiors a altres bacteris, fet que l’ha convertit en un dels reis indiscutibles de la recerca biotecnològica.`},
-		es:{titulo:"Nombre del ser vivo", descripcion:"Descripcion del ser vivo"}
+		en:{titulo:"Nombre del ser vivo", descripcion:"Descripcion del ser vivo"}
 	},
 	{
 		//? Ficha 4
 		es:{titulo:"Nombre del ser vivo", descripcion:"Descripcion del ser vivo"},
 		ca:{titulo:"nombre del ser vivo", descripcion:"Descripcion del ser vivo"},
-		es:{titulo:"Nombre del ser vivo", descripcion:"Descripcion del ser vivo"}
+		en:{titulo:"Nombre del ser vivo", descripcion:"Descripcion del ser vivo"}
 	},
 	{
 		//? Ficha 5
 		es:{titulo:"Nombre del ser vivo", descripcion:"Descripcion del ser vivo"},
 		ca:{titulo:"nombre del ser vivo", descripcion:"Descripcion del ser vivo"},
-		es:{titulo:"Nombre del ser vivo", descripcion:"Descripcion del ser vivo"}
-	},
+		en:{titulo:"Nombre del ser vivo", descripcion:"Descripcion del ser vivo"}
+	}
 ];
 
 function getFicha(markerIndex,lang){
